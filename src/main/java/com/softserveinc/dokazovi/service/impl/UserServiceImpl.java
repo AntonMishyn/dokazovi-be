@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +22,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserEntity findByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findByEmail(email)
+				.orElse(null);
 	}
 
 	@Override
@@ -33,5 +36,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findRandomActiveUsers(pageable)
 				.map(userMapper::toExpertPreviewDTO);
 	}
+
+	@Override
+	public Optional<UserEntity> findById(Integer id) {
+		return userRepository.findById(id);
+	}
+
 
 }

@@ -5,6 +5,8 @@ import com.softserveinc.dokazovi.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 
 public interface UserService {
 
@@ -13,4 +15,6 @@ public interface UserService {
 	Page<UserEntity> findAll(Pageable pageable);
 
 	Page<ExpertPreviewDTO> getExpertsPreview(Pageable pageable);
+
+	Optional<UserEntity> findById(Integer id);
 }

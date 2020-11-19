@@ -1,5 +1,6 @@
 package com.softserveinc.dokazovi.entity;
 
+import com.softserveinc.dokazovi.entity.enumerations.AuthProvider;
 import com.softserveinc.dokazovi.entity.enumerations.PostStatus;
 import com.softserveinc.dokazovi.entity.enumerations.UserStatus;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Comparator;
@@ -59,6 +61,12 @@ public class UserEntity implements Serializable {
 
 	@Column(name = "bio", columnDefinition = "TEXT")
 	private String bio;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private AuthProvider provider;
+
+	private String providerId;
 
 	@ManyToOne
 	@JoinColumn(name = "direction_id")

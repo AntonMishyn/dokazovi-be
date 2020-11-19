@@ -48,6 +48,12 @@ dependencies {
 	implementation "org.mapstruct:mapstruct:${MAPPER_VERSION}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${MAPPER_VERSION}"
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${MAPPER_VERSION}"
+
+	compile group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.4.1'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+
 	compileOnly "org.projectlombok:lombok"
 	annotationProcessor "org.projectlombok:lombok"
 
