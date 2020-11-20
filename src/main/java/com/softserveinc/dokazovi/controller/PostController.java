@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.softserveinc.dokazovi.controller.EndPoints.IMPORTANT;
+import static com.softserveinc.dokazovi.controller.EndPoints.POST_IMPORTANT;
 import static com.softserveinc.dokazovi.controller.EndPoints.POST_LATEST;
 
 @RestController
@@ -39,7 +39,7 @@ public class PostController {
 
 	@ApiPageable
 	@ApiOperation(value = "Find important posts")
-	@GetMapping(IMPORTANT)
+	@GetMapping(POST_IMPORTANT)
 	public ResponseEntity<Page<ImportantPostDTO>> findImportant(
 			@PageableDefault(size = 3, sort = {"createdAt"}, direction = Sort.Direction.DESC) Pageable pageable) {
 		return ResponseEntity

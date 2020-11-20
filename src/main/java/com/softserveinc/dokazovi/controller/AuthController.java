@@ -27,8 +27,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
+import static com.softserveinc.dokazovi.controller.EndPoints.AUTH;
+import static com.softserveinc.dokazovi.controller.EndPoints.AUTH_LOGIN;
+import static com.softserveinc.dokazovi.controller.EndPoints.AUTH_SIGNUP;
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(AUTH)
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -37,7 +41,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
 
-    @PostMapping("/login")
+    @PostMapping(AUTH_LOGIN)
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -53,13 +57,12 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    @PostMapping("/signup")
+    @PostMapping(AUTH_SIGNUP)
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userService.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
 
-        // Creating user's account
         UserEntity user = new UserEntity();
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
