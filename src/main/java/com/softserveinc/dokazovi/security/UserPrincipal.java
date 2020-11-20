@@ -1,6 +1,7 @@
 package com.softserveinc.dokazovi.security;
 
 import com.softserveinc.dokazovi.entity.UserEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
