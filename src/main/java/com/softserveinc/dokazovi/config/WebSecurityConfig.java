@@ -94,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/api",
+                    .antMatchers("/api", "/**/auth/**",
                         "/error",
                         "/favicon.ico",
                         "/**/*.png",
@@ -112,11 +112,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .oauth2Login()
                     .authorizationEndpoint()
-                        .baseUri("/api/oauth2/authorize")
+                        .baseUri("/oauth2/authorize")
                         .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                         .and()
                     .redirectionEndpoint()
-                        .baseUri("/api/oauth2/callback/*")
+                        .baseUri("/oauth2/callback/*")
                         .and()
                     .userInfoEndpoint()
                         .userService(customOAuth2UserService)
