@@ -8,6 +8,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -16,15 +17,12 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class TokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-    private AppProperties appProperties;
-
-    public TokenProvider(AppProperties appProperties) {
-        this.appProperties = appProperties;
-    }
+    private final AppProperties appProperties;
 
     public String createToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();

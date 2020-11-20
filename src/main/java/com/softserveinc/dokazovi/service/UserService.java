@@ -10,11 +10,16 @@ import java.util.Optional;
 
 public interface UserService {
 
-	UserEntity findByEmail(String email);
-
 	Page<UserEntity> findAll(Pageable pageable);
 
 	Page<ExpertPreviewDTO> getExpertsPreview(Pageable pageable);
 
 	Optional<UserEntity> findById(Integer id);
+
+	Optional<UserEntity> findByEmail(String email);
+
+	Boolean existsByEmail(String email);
+
+	UserEntity save(UserEntity userEntity);
+
 }

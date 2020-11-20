@@ -39,8 +39,7 @@ public class UserController {
 				.body(userService.getExpertsPreview(pageable));
 	}
 
-	@GetMapping("/user/me")
-	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/me")
 	public UserEntity getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
 		return userService.findById(userPrincipal.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));

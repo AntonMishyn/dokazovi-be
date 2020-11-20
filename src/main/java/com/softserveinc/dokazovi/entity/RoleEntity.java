@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity(name = "role_entity")
 @Table(name = "roles")
-public class RoleEntity implements Serializable {
+public class RoleEntity implements Serializable, GrantedAuthority {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +38,9 @@ public class RoleEntity implements Serializable {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<UserEntity> users;
+
+	@Override
+	public String getAuthority() {
+		return null;
+	}
 }

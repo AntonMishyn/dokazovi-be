@@ -9,6 +9,8 @@ import com.softserveinc.dokazovi.payload.LoginRequest;
 import com.softserveinc.dokazovi.payload.SignUpRequest;
 import com.softserveinc.dokazovi.repositories.UserRepository;
 import com.softserveinc.dokazovi.security.TokenProvider;
+import com.softserveinc.dokazovi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,19 +29,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private TokenProvider tokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final TokenProvider tokenProvider;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -59,7 +55,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(userService.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
 
@@ -71,7 +67,7 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        UserEntity result = userRepository.save(user);
+        UserEntity result = userService.save(user);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")

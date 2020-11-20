@@ -4,6 +4,7 @@ package com.softserveinc.dokazovi.security;
 import com.softserveinc.dokazovi.entity.UserEntity;
 import com.softserveinc.dokazovi.exception.ResourceNotFoundException;
 import com.softserveinc.dokazovi.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	@Override
 	@Transactional

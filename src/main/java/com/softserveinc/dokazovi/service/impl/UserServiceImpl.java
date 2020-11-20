@@ -21,12 +21,6 @@ public class UserServiceImpl implements UserService {
 	private final UserMapper userMapper;
 
 	@Override
-	public UserEntity findByEmail(String email) {
-		return userRepository.findByEmail(email)
-				.orElse(null);
-	}
-
-	@Override
 	public Page<UserEntity> findAll(Pageable pageable) {
 		return userRepository.findAll(pageable);
 	}
@@ -42,5 +36,20 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(id);
 	}
 
+
+	@Override
+	public Optional<UserEntity> findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public Boolean existsByEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
+
+	@Override
+	public UserEntity save(UserEntity userEntity) {
+		return userRepository.save(userEntity);
+	}
 
 }
