@@ -1,6 +1,5 @@
 package com.softserveinc.dokazovi.config;
 
-import com.softserveinc.dokazovi.security.*;
 import com.softserveinc.dokazovi.security.CustomUserDetailsService;
 import com.softserveinc.dokazovi.security.RestAuthenticationEntryPoint;
 import com.softserveinc.dokazovi.security.TokenAuthenticationFilter;
