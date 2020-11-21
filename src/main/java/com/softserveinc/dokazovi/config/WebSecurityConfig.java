@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api", "/**/auth/**",
+                .antMatchers("/api/**",
                         "/error",
                         "/favicon.ico",
                         "/**/*.png",
@@ -104,7 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/api/auth/**", "/api/oauth2/**", "/**/post/**")
+                .antMatchers("/auth/**", "/oauth2/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
