@@ -18,6 +18,8 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
 	@Value("${url.assets.path}")
 	private String urlAssetsPath;
 
+	private final long MAX_AGE_SECS = 3600;
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
@@ -25,4 +27,13 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
 				.addResourceLocations("file:///" + Path.of(fsPath).toAbsolutePath() + File.separator);
 	}
 
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+				.allowedHeaders("*")
+				.allowCredentials(true)
+				.maxAge(MAX_AGE_SECS);
+	}
 }
